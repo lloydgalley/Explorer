@@ -1,0 +1,23 @@
+.progress {
+  &-circle {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  &-value {
+    color: #49687c;
+    font-size: 26px;
+
+    &-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

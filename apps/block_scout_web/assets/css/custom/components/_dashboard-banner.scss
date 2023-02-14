@@ -1,0 +1,70 @@
+.dashboard-banner-container {
+  height: initial;
+
+  .card {
+    box-shadow: none;
+    min-height: 210px;
+    max-height: 210px;
+
+    @include media-breakpoint-down(sm) {
+      max-height: none;
+    }
+
+    .cycle-icon {
+      position: absolute;
+      right: 20px;
+      top: 30px;
+    }
+
+    .dashboard-banner-card-title {
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+    
+    .dashboard-banner-card-value {
+      font-size: 1.75rem;
+      color: #FFFFFF; 
+
+      &.dashboard-banner-card-value-small {
+        font-size: 1rem;
+        line-height: 1;
+        margin-top: 1rem;
+      }
+    
+      .symbol {
+        font-size: 14px;
+      }
+
+      .validator-info-url {
+        font-size: 14px;
+        color: #FFFFFF;
+        text-decoration: underline;
+      }
+    }
+    .dashboard-banner-card-title-cycle {
+      font-size: 14px;
+      color: #4A4D54;
+    }
+
+    .dashboard-banner-card-value-cycle {
+      font-size: 1.75rem;
+      color: #4A4D54; 
+
+      &.dashboard-banner-card-value-cycle-small {
+        font-size: 1rem;
+        line-height: 1;
+        margin-top: 1rem;
+      }
+    
+      .symbol {
+        font-size: 14px;
+      }
+
+      .validator-info-url {
+        font-size: 14px;
+        color: #4A4D54;
+        text-decoration: underline;
+      }
+    }
+  }
+}

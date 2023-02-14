@@ -1,0 +1,105 @@
+<footer class="footer">
+  <div class="footer-body container">
+    <!-- Logo -->
+    <div class="row footer-logo-row">
+      <div>
+        <%= link to: chain_path(@conn, :show), class: "footer-brand" do %>
+          <img class="footer-logo" src="<%= logo_footer() %>" alt="ALL" />
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <p class="footer-info-text"><%= gettext("The ALL network is a permissionless and border-less public ledger designed for easy integration of everyday payments.") %></p>
+        <div class="footer-social-icons">
+          <a href="" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Twitter") %>'>
+                <div class="footer-social-icon-container"><img src="/images/twitter.png"></div>
+            </a>
+            <a href="" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Telegram") %>'>
+                <div class="footer-social-icon-container"><img src="/images/telegram.png"></div>
+            </a>
+            <a href="" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Facebook") %>'>
+                <div class="footer-social-icon-container"><img src="/images/facebook.png"></div>
+            </a>
+            <a href="" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Medium") %>'>
+                <div class="footer-social-icon-container"><img src="/images/medium.png"></div>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="btn-dark float-left" onclick="addNetwork('web3');">
+          <img class="" width="15" src="/images/metamask.svg" alt="Metamask"> Add ALL Network
+      </button>
+    </div>
+  </div>
+</footer>
+<script src="/js/web3-utils.min.js"></script>
+<script src="/js/web3-eth.min.js"></script>
+<script src="/js/web3-providers-http.min.js"></script>
+<script type="text/javascript">
+        var eth;
+        var isTestnet = 'false';
+
+        async function addNetwork(type) {
+            
+            if (type === 'web3') {
+                if (typeof ethereum !== 'undefined') {
+                    eth = new Web3Eth(ethereum);
+                } else if (typeof web3 !== 'undefined') {
+                    eth = new Web3Eth(web3.givenProvider);
+                } else {
+                    eth = new Web3Eth(ethereum);
+                }                
+            }            
+
+            if (typeof eth !== 'undefined') {
+                var network = 0;
+                network = await eth.net.getId();
+                netID = network.toString();
+                var params;
+                if (isTestnet == "false") {
+                    if (netID == "651940") {
+                        alert("ALL Network has already been added to Metamask.");
+                        return;
+                    } else {
+                        params = [{
+                            chainId: '0x9F2A4',
+                            chainName: 'ALL Mainnet',
+                            nativeCurrency: {
+                                name: 'Alltra Coin',
+                                symbol: 'ALL',
+                                decimals: 18
+                            },
+                            rpcUrls: ['https://mainnet-rpc.alltra.global/'],
+                            blockExplorerUrls: ['https://alltra.global/']
+                        }]
+                    }
+                } else {
+                    if (netID == "58875") {
+                        alert("ALL Test Network has already been added to Metamask."); 
+                        return;
+                    } else {
+                        params = [{
+                            chainId: '0xE5FB',
+                            chainName: 'Alltra Coin',
+                            nativeCurrency: {
+                                name: 'NORDEK',
+                                symbol: 'ALL',
+                                decimals: 18
+                            },
+                            rpcUrls: ['https://testnet-rpc.alltra.global/'],
+                            blockExplorerUrls: ['https://testnet-explorer.alltra.global/']
+                        }]
+                    }
+                }
+
+                window.ethereum.request({ method: 'wallet_addEthereumChain', params })
+                    .then(() => console.log('Success'))
+                    .catch((error) => console.log("Error", error.message));
+            } else {
+                alert('Unable to locate a compatible web3 browser!');
+            }
+        }
+    </script>
